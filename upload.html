@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css"/>
+		<link rel="stylesheet" href="css/upload.css"/>
+		<!-- 引入jquery框架 -->
+		<script src="js/jquery.js"></script>
+	</head>
+	<body>
+		<header>
+			<span>美图分享-图片上传</span>
+		</header>
+		<!--上传文件的按钮组 -->
+		<div class="btn-group">
+			<button class="btn">选择图片</button>
+			<button class="btn">上传图片</button>
+		</div>
+		<!--显示要被上传的文件名称-->
+		<div class="upload-box"></div>
+		<script>
+			/*
+				Jquery:基于原生js封装的一套快速操作文档元素的
+				框架，同时能够提供便捷的CSS，属性，选择器以及
+				特效，ajax等基础功能
+			*/
+			$(function(){
+				//选中类名称为btn的第一个元素
+				$('.btn:first').click(function(){
+					//创建一个input[type=file]控件和img控件
+					var file = $('<input type="file" name="file" hidden>');
+					var preview = $('<img/>');
+					//为图片对象设置class
+					preview.addClass('upload-item')
+					
+					//将控件追加到div中
+					$('.upload-box').append(file);
+					$('.upload-box').append(preview);
+					//触发文件框的点击事件
+					file.click();
+					//为文件控件添加内容改变事件
+					file.change(function(){
+						//获取被选中的图片所在路径
+						var path = $(this).val();
+						//为图片指定src属性(错误)
+						preview.prop('src',path);
+						//js - FileReader 对象 实现图片预览功能
+					});
+				})
+			})
+		</script>
+	</body>
+</html>
